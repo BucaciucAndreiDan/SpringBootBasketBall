@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Login page</title>
+    <link th:href="@{/public/style.css}" rel="stylesheet"/>
+</head>
+<body>
+<div id="container">
+    <div th:if="${error==null}">
+        <h6 th:if="${gameDate!=null}">Games on:
+            <bold th:text="${gameDate}"></bold>
+        </h6>
+        <h6 th:if="${gameDate==null}">Games on:
+            No games available
+        </h6>
+        <form action="/games.html" method="GET">
+            <input type="submit" name="action" value="Refresh Game List"></form>
+        </form>
+        <p th:if="${games==null or games.empty}" class="error">No games exist</p>
+        <th:block th:each="game : ${games}">
+            <div class="game">
+                <p>Date:
+                    <bold th:text="${game.date}"></bold>
+                </p>
+                <p>Status:
+                    <bold th:text="${game.status}"></bold>
+                </p>
+                <p>Country:
+                    <bold th:text="${game.country}"></bold>
+                </p>
+                <p>Home team:
+                    <bold th:text="${game.homeTeam}"></bold>
+                </p>
+                <p>Score:
+                    <bold th:text="${game.homeScore}"></bold>
+                </p>
+                <p>Away team:
+                    <bold th:text="${game.awayTeam}"></bold>
+                </p>
+                <p>Score:
+                    <bold th:text="${game.awayScore}"></bold>
+                </p>
+            </div>
+        </th:block>
+    </div>
+
+</div>
+<p th:if="${error!=null}" th:text="${error}" class="error">
+    </div>
+</body>
+</html>
